@@ -55,5 +55,5 @@ func _on_file_dialog_dir_selected(dir):
 			pass
 		childPosition += 1
 		
-func displayImage(filePosition):
-	pass
+func _on_new_image_mouse_entered(info):
+	print("hello child number ", info)
