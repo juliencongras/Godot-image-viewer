@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cslauk5chdbvy"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_yc8y1"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_yc8y1")
+
+[node name="Open folder button" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 39.0
+text = "Open folder"
+
+[node name="Thumbnails container" type="GridContainer" parent="."]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 1134.0
+offset_bottom = 651.0
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+initial_position = 1
+size = Vector2i(1000, 500)
+ok_button_text = "Select This Folder"
+file_mode = 2
+
+[connection signal="pressed" from="Open folder button" to="." method="_on_open_folder_button_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
