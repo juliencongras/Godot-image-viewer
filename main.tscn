@@ -12,18 +12,22 @@ offset_right = 117.0
 offset_bottom = 39.0
 text = "Open folder"
 
-[node name="Thumbnails container" type="GridContainer" parent="."]
-offset_left = 16.0
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_top = 48.0
-offset_right = 1134.0
-offset_bottom = 651.0
+offset_right = 1148.0
+offset_bottom = 648.0
+
+[node name="Thumbnails container" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
 initial_position = 1
 size = Vector2i(1000, 500)
-ok_button_text = "Select This Folder"
+ok_button_text = "Select Current Folder"
 file_mode = 2
+access = 2
+show_hidden_files = true
 
 [connection signal="pressed" from="Open folder button" to="." method="_on_open_folder_button_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
