@@ -24,13 +24,13 @@ func _on_file_dialog_dir_selected(dir):
 	var folderPath = DirAccess.open(dir)
 	folderPath.list_dir_begin()
 	var file_name = folderPath.get_next()
+	var childPosition = 0
 	while file_name != "":
 		if file_name.get_extension() == "png" or file_name.get_extension() == "jpg" :
 			var fullPath = str(dir, "/", file_name)
 			filesInFolder.append(fullPath)
 		file_name = folderPath.get_next()
 	for file in filesInFolder:
-		var childPosition = 0
 		var selfSelected : bool = false
 		var newImage = TextureRect.new()
 		var imageFile = Image.load_from_file(file)
@@ -52,7 +52,7 @@ func _on_file_dialog_dir_selected(dir):
 		elif newImage.mouse_exited:
 			selfSelected = false
 		if selfSelected and InputEventMouseButton:
-			print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
+			pass
 		childPosition += 1
 		
 func displayImage(filePosition):
