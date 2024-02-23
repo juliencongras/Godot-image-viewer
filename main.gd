@@ -30,6 +30,8 @@ func _on_file_dialog_dir_selected(dir):
 			filesInFolder.append(fullPath)
 		file_name = folderPath.get_next()
 	for file in filesInFolder:
+		var childPosition = 0
+		var selfSelected : bool = false
 		var newImage = TextureRect.new()
 		var imageFile = Image.load_from_file(file)
 		var thumbnailImageOriginalSize = imageFile.get_size()
@@ -42,8 +44,16 @@ func _on_file_dialog_dir_selected(dir):
 		var textureFromImage = ImageTexture.create_from_image(imageFile)
 		newImage.texture = textureFromImage
 		thumbnails_container.add_child(newImage)
-		newImage.focus_mode = Control.FOCUS_CLICK
 		newImage.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		#if newImage.focus_entered:
-		#	imageClicked.emit(file)
-		print(newImage.texture.resource_name)
+		newImage.set_meta("childPosition", childPosition)
+		if newImage.mouse_entered:
+			selfSelected = true
+			print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
+		elif newImage.mouse_exited:
+			selfSelected = false
+		if selfSelected and InputEventMouseButton:
+			print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
+		childPosition += 1
+		
+func displayImage(filePosition):
+	pass

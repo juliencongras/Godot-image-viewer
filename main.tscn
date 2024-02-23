@@ -29,5 +29,12 @@ file_mode = 2
 access = 2
 show_hidden_files = true
 
+[node name="Selected image" type="Sprite2D" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="Open folder button" to="." method="_on_open_folder_button_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
