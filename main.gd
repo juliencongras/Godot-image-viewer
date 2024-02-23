@@ -43,6 +43,7 @@ func _on_file_dialog_dir_selected(dir):
 			imageFile.resize(thumbnailWidth, thumbnailSize)
 		var textureFromImage = ImageTexture.create_from_image(imageFile)
 		newImage.texture = textureFromImage
+		newImage.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		thumbnails_container.add_child(newImage)
 		newImage.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		newImage.set_meta("childPosition", childPosition)
