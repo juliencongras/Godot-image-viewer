@@ -3,6 +3,5 @@
 
 To do:
 - Erase existing thumbnails when selecting another directory
-- Make thumbnails container fit window size
 - Display picture when clicking on thumbnail
 - Add a border to thumbnails

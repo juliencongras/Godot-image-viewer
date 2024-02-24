@@ -15,7 +15,7 @@ text = "Open folder"
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_top = 48.0
 offset_right = 1148.0
-offset_bottom = 648.0
+offset_bottom = 637.0
 
 [node name="Thumbnails container" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
