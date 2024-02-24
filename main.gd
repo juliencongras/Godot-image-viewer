@@ -21,6 +21,7 @@ func _on_open_folder_button_pressed():
 func _on_file_dialog_dir_selected(dir):
 	for gridImage in thumbnails_container.get_children():
 		gridImage.queue_free()
+		filesInFolder.clear()
 	var folderPath = DirAccess.open(dir)
 	folderPath.list_dir_begin()
 	var file_name = folderPath.get_next()
@@ -49,7 +50,7 @@ func _on_file_dialog_dir_selected(dir):
 		newImage.set_meta("childPosition", childPosition)
 		if newImage.mouse_entered:
 			selfSelected = true
-			print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
+			#print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
 		elif newImage.mouse_exited:
 			selfSelected = false
 		if selfSelected and InputEventMouseButton:
