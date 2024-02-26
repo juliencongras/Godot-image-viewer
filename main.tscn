@@ -35,5 +35,14 @@ show_hidden_files = true
 visible = false
 centered = false
 
+[node name="Scale slider" type="HSlider" parent="."]
+visible = false
+offset_left = 392.0
+offset_top = 608.0
+offset_right = 754.0
+offset_bottom = 624.0
+max_value = 1.0
+step = 0.001
+
 [connection signal="pressed" from="Open folder button" to="." method="_on_open_folder_button_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]

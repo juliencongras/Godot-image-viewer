@@ -4,6 +4,7 @@ extends Node2D
 @onready var scroll_container = $ScrollContainer
 @onready var thumbnails_container = $"ScrollContainer/Thumbnails container"
 @onready var selected_image = $"Selected image"
+@onready var scale_slider = $"Scale slider"
 
 @export var thumbnailScene : PackedScene
 
@@ -61,11 +62,14 @@ func image_selected(info):
 	selected_image.texture = texture
 	var windowSize = get_viewport_rect().size
 	if selected_image.texture.get_width() > selected_image.texture.get_height():
-		var imageHeight = windowSize.x * selected_image.texture.get_height() / selected_image.texture.get_width()
-		var newScale = imageHeight / selected_image.texture.get_height()
-		selected_image.scale = Vector2(newScale, newScale)
-	else:
+		if selected_image.texture.get_width() > windowSize.x:
+			var imageHeight = windowSize.x * selected_image.texture.get_height() / selected_image.texture.get_width()
+			var newScale = imageHeight / selected_image.texture.get_height()
+			selected_image.scale = Vector2(newScale, newScale)
+	elif selected_image.texture.get_width() > windowSize.x or selected_image.texture.get_height() > windowSize.y:
 		var imageWidth = windowSize.y * selected_image.texture.get_width() / selected_image.texture.get_height()
 		var newScale = imageWidth / selected_image.texture.get_width()
 		selected_image.scale = Vector2(newScale, newScale)
 	selected_image.visible = true
+	scale_slider.visible = true
+	scale_slider.value = selected_image.scale.x
