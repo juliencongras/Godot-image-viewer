@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cslauk5chdbvy"]
+[gd_scene load_steps=3 format=3 uid="uid://cslauk5chdbvy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yc8y1"]
+[ext_resource type="PackedScene" uid="uid://7lw5haet276r" path="res://thumbnail.tscn" id="2_xfx0y"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_yc8y1")
+thumbnailScene = ExtResource("2_xfx0y")
 
 [node name="Open folder button" type="Button" parent="."]
 offset_left = 16.0
