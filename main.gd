@@ -3,6 +3,7 @@ extends Node2D
 @onready var file_dialog = $FileDialog
 @onready var scroll_container = $ScrollContainer
 @onready var thumbnails_container = $"ScrollContainer/Thumbnails container"
+@onready var selected_image = $"Selected image"
 var filesInFolder = []
 var thumbnailSize = 200
 
@@ -25,7 +26,6 @@ func _on_file_dialog_dir_selected(dir):
 	var folderPath = DirAccess.open(dir)
 	folderPath.list_dir_begin()
 	var file_name = folderPath.get_next()
-	var childPosition = 0
 	while file_name != "":
 		if file_name.get_extension() == "png" or file_name.get_extension() == "jpg" :
 			var fullPath = str(dir, "/", file_name)
@@ -47,15 +47,26 @@ func _on_file_dialog_dir_selected(dir):
 		newImage.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		thumbnails_container.add_child(newImage)
 		newImage.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		newImage.set_meta("childPosition", childPosition)
+		newImage.set_meta("filepath", file)
 		if newImage.mouse_entered:
 			selfSelected = true
-			#print(thumbnails_container.get_child(newImage.get_meta("childPosition")))
 		elif newImage.mouse_exited:
 			selfSelected = false
 		if selfSelected and InputEventMouseButton:
-			pass
-		childPosition += 1
+			image_selected(file)
 		
-func _on_new_image_mouse_entered(info):
-	print("hello child number ", info)
+func image_selected(info):
+	var image = Image.load_from_file(info)
+	var texture = ImageTexture.create_from_image(image)
+	selected_image.texture = texture
+	var windowSize = get_viewport_rect().size
+	print(selected_image.texture.get_height())
+	if selected_image.texture.get_width() > selected_image.texture.get_height():
+		var imageHeight = windowSize.x * selected_image.texture.get_height() / selected_image.texture.get_width()
+		var newScale = imageHeight / selected_image.texture.get_height()
+		selected_image.scale = Vector2(newScale, newScale)
+	else:
+		var imageWidth = windowSize.y * selected_image.texture.get_width() / selected_image.texture.get_height()
+		var newScale = imageWidth / selected_image.texture.get_width()
+		selected_image.scale = Vector2(newScale, newScale)
+	selected_image.visible = true
