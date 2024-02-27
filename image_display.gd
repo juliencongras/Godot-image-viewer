@@ -10,6 +10,7 @@ func _ready():
 	imageDisplayed.texture = texture
 	var windowSize = get_viewport_rect().size
 	imageDimensions.text = str(imageDisplayed.texture.get_width(), " X " ,imageDisplayed.texture.get_height())
+	#Scale image to fit the screen
 	if imageDisplayed.texture.get_width() > imageDisplayed.texture.get_height():
 		if imageDisplayed.texture.get_width() > windowSize.x:
 			var imageHeight = windowSize.x * imageDisplayed.texture.get_height() / imageDisplayed.texture.get_width()
@@ -28,6 +29,9 @@ func _ready():
 			var imageHeight = windowSize.x * imageDisplayed.texture.get_height() / imageDisplayed.texture.get_width()
 			var newScale = imageHeight / imageDisplayed.texture.get_height()
 			imageDisplayed.scale *= Vector2(newScale, newScale)
+	#Center image
+	imageDisplayed.position.x += windowSize.x / 2 - (imageDisplayed.texture.get_width() * imageDisplayed.scale.x) / 2
+	imageDisplayed.position.y += windowSize.y / 2 - (imageDisplayed.texture.get_height() * imageDisplayed.scale.y) / 2
 
 func _on_close_image_pressed():
 	queue_free()

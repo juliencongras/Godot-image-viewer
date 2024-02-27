@@ -13,6 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_14vay")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -35,11 +37,11 @@ offset_bottom = 44.0
 text = "X"
 
 [node name="Image dimensions" type="Label" parent="."]
-layout_mode = 0
-offset_left = 544.0
-offset_top = 600.0
-offset_right = 584.0
-offset_bottom = 623.0
+layout_mode = 1
+offset_left = 528.0
+offset_top = 608.0
+offset_right = 568.0
+offset_bottom = 634.0
 text = "TEST"
 label_settings = SubResource("LabelSettings_tkrh4")
 
