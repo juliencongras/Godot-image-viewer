@@ -16,11 +16,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	thumbnails_container.columns = scroll_container.get_rect().size.x / thumbnailSize
 	
 	if Global.selectedImagePath != "" and Input.is_action_just_pressed("click"):
-		image_selected(Global.selectedImagePath)
+		image_selected()
 
 func _on_open_folder_button_pressed():
 	file_dialog.visible = true
@@ -54,6 +54,6 @@ func _on_file_dialog_dir_selected(dir):
 		thumbnails_container.add_child(newImage)
 		newImage.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		
-func image_selected(info):
+func image_selected():
 	var imageSceneInstance = imageScene.instantiate()
 	add_child(imageSceneInstance)

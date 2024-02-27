@@ -2,5 +2,7 @@
  An exercise to see if I can make an image viewer.
 
 To do:
-- Use the correct scaling for image
+- Center images
+- Control image scaling
+- Move images
 - Add a border to thumbnails
