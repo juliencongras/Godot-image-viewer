@@ -3,10 +3,9 @@ extends Node2D
 @onready var file_dialog = $FileDialog
 @onready var scroll_container = $ScrollContainer
 @onready var thumbnails_container = $"ScrollContainer/Thumbnails container"
-@onready var selected_image = $"Selected image"
-@onready var scale_slider = $"Scale slider"
 
 @export var thumbnailScene : PackedScene
+@export var imageScene : PackedScene
 
 var filesInFolder = []
 var thumbnailSize = 200
@@ -20,7 +19,7 @@ func _ready():
 func _process(delta):
 	thumbnails_container.columns = scroll_container.get_rect().size.x / thumbnailSize
 	
-	if Global.selectedImagePath != "" and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Global.selectedImagePath != "" and Input.is_action_just_pressed("click"):
 		image_selected(Global.selectedImagePath)
 
 func _on_open_folder_button_pressed():
@@ -39,7 +38,6 @@ func _on_file_dialog_dir_selected(dir):
 			filesInFolder.append(fullPath)
 		file_name = folderPath.get_next()
 	for file in filesInFolder:
-		var selfSelected : bool = false
 		var newImage = thumbnailScene.instantiate()
 		var imageFile = Image.load_from_file(file)
 		var thumbnailImageOriginalSize = imageFile.get_size()
@@ -57,19 +55,5 @@ func _on_file_dialog_dir_selected(dir):
 		newImage.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		
 func image_selected(info):
-	var image = Image.load_from_file(info)
-	var texture = ImageTexture.create_from_image(image)
-	selected_image.texture = texture
-	var windowSize = get_viewport_rect().size
-	if selected_image.texture.get_width() > selected_image.texture.get_height():
-		if selected_image.texture.get_width() > windowSize.x:
-			var imageHeight = windowSize.x * selected_image.texture.get_height() / selected_image.texture.get_width()
-			var newScale = imageHeight / selected_image.texture.get_height()
-			selected_image.scale = Vector2(newScale, newScale)
-	elif selected_image.texture.get_width() > windowSize.x or selected_image.texture.get_height() > windowSize.y:
-		var imageWidth = windowSize.y * selected_image.texture.get_width() / selected_image.texture.get_height()
-		var newScale = imageWidth / selected_image.texture.get_width()
-		selected_image.scale = Vector2(newScale, newScale)
-	selected_image.visible = true
-	scale_slider.visible = true
-	scale_slider.value = selected_image.scale.x
+	var imageSceneInstance = imageScene.instantiate()
+	add_child(imageSceneInstance)

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cslauk5chdbvy"]
+[gd_scene load_steps=4 format=3 uid="uid://cslauk5chdbvy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yc8y1"]
 [ext_resource type="PackedScene" uid="uid://7lw5haet276r" path="res://thumbnail.tscn" id="2_xfx0y"]
+[ext_resource type="PackedScene" uid="uid://dfwsvhnncuxbm" path="res://image_display.tscn" id="3_3nj65"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_yc8y1")
 thumbnailScene = ExtResource("2_xfx0y")
+imageScene = ExtResource("3_3nj65")
 
 [node name="Open folder button" type="Button" parent="."]
 offset_left = 16.0
@@ -30,19 +32,6 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 show_hidden_files = true
-
-[node name="Selected image" type="Sprite2D" parent="."]
-visible = false
-centered = false
-
-[node name="Scale slider" type="HSlider" parent="."]
-visible = false
-offset_left = 392.0
-offset_top = 608.0
-offset_right = 754.0
-offset_bottom = 624.0
-max_value = 1.0
-step = 0.001
 
 [connection signal="pressed" from="Open folder button" to="." method="_on_open_folder_button_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
