@@ -4,6 +4,9 @@ extends Control
 @onready var imageDimensions = $"Image dimensions"
 @onready var zoomSlider = $ZoomSlider
 
+var clickingImage : bool = false
+var mouseOriginalPosition : Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var image = Image.load_from_file(Global.selectedImagePath)
@@ -34,6 +37,19 @@ func _ready():
 	imageDisplayed.position.x = windowSize.x / 2 - (imageDisplayed.texture.get_width() * imageDisplayed.scale.x) / 2
 	imageDisplayed.position.y = windowSize.y / 2 - (imageDisplayed.texture.get_height() * imageDisplayed.scale.y) / 2
 	zoomSlider.value = imageDisplayed.scale.x
+
+func _process(_delta):
+	var mouseRelativePosition = get_global_mouse_position() - mouseOriginalPosition
+	
+	if Input.is_action_just_pressed("click"):
+		clickingImage = true
+		mouseOriginalPosition = get_global_mouse_position()
+	
+	if Input.is_action_just_released("click"):
+		clickingImage = false
+	
+	if clickingImage:
+		imageDisplayed.position = mouseRelativePosition
 
 func _on_close_image_pressed():
 	queue_free()
